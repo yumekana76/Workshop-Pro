@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workshop Pro | Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>Workshop Pro</h1>
+      </div>
+      <div class="admin">
+        <span>Admin</span>
+      </div>
+    </header>
+    <div class="layout">
+      <aside class="sidebar">
+        <nav class="nav">
+          <a href="dashboard.html" class="nav-link active">
+            <span>Dashboard</span>
+          </a>
+          <a href="customers.html" class="nav-link">
+            <span>Customers</span>
+          </a>
+          <a href="kendaraan.html" class="nav-link">
+            <span>Kendaraan</span>
+          </a>
+          <a href="service.html" class="nav-link">
+            <span>Service</span>
+          </a>
+          <a href="riwayat.html" class="nav-link">
+            <span>Riwayat</span>
+          </a>
+          <a href="mekanik.html" class="nav-link">
+            <span>Mekanik</span>
+          </a>
+          <a href="sparepart.html" class="nav-link">
+            <span>Sparepart</span>
+          </a>
+          <a href="pengaturan.html" class="nav-link">
+            <span>Pengaturan</span>
+          </a>
+        </nav>
+      </aside>
+      <main class="main">
+        <section class="page-header">
+          <div>
+            <h2>Dashboard</h2>
+            <p>Selamat datang kembali, Admin</p>
+          </div>
+        </section>
+        <section class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number" id="totalKendaraan">0</span>
+            <span class="stat-label">Kendaraan Hari Ini</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalMenunggu">0</span>
+            <span class="stat-label">Menunggu</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalDikerjakan">0</span>
+            <span class="stat-label">Dikerjakan</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalQC">0</span>
+            <span class="stat-label">Quality Check</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="totalSelesai">0</span>
+            <span class="stat-label">Selesai</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number money" id="totalPendapatan"> Rp 0 </span>
+            <span class="stat-label">Estimasi Pendapatan</span>
+          </div>
+        </section>
+        <section class="dashboard-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Status Service</h3>
+                <p>Ringkasan kendaraan hari ini</p>
+              </div>
+              <a href="service.html">Lihat semua</a>
+            </div>
+            <div class="service-status">
+              <div class="progress-wrapper">
+                <div class="progress-circle">
+                  <div class="progress-inner">
+                    <strong id="totalServiceCircle">0</strong>
+                    <span>Service</span>
+                  </div>
+                </div>
+              </div>
+              <div class="status-list">
+                <div class="status-item">
+                  <span class="status-dot waiting"></span>
+                  <span>Menunggu</span>
+                  <strong id="circleMenunggu">0</strong>
+                </div>
+                <div class="status-item">
+                  <span class="status-dot working"></span>
+                  <span>Dikerjakan</span>
+                  <strong id="circleDikerjakan">0</strong>
+                </div>
+                <div class="status-item">
+                  <span class="status-dot qc"></span>
+                  <span>Quality Check</span>
+                  <strong id="circleQC">0</strong>
+                </div>
+                <div class="status-item">
+                  <span class="status-dot done"></span>
+                  <span>Selesai</span>
+                  <strong id="circleSelesai">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Mekanik Terbaik</h3>
+                <p>Performa mekanik</p>
+              </div>
+              <a href="mekanik.html">Lihat semua</a>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Spesialisasi</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="mekanikTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section class="panel vehicle-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Daftar Kendaraan Masuk</h3>
+              <p>Data kendaraan yang masuk hari ini</p>
+            </div>
+            <div class="search-box">
+              <input
+                type="search"
+                id="searchKendaraan"
+                placeholder="Cari kendaraan..."
+              />
+            </div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>No. Polisi</th>
+                  <th>Jenis</th>
+                  <th>Merk</th>
+                  <th>Pelanggan</th>
+                  <th>Keluhan</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="kendaraanTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
