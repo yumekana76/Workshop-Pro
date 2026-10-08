@@ -1,11 +1,332 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Workshop Pro - Kendaraan</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brand">
+        <h1>Workshop Pro</h1>
+      </div>
+
+      <div class="admin">Admin</div>
+    </header>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <nav class="nav">
+          <a href="dashboard.html" class="nav-link"> Dashboard </a>
+
+          <a href="customers.html" class="nav-link"> Customers </a>
+
+          <a href="kendaraan.html" class="nav-link active"> Kendaraan </a>
+
+          <a href="service.html" class="nav-link"> Service </a>
+
+          <a href="riwayat.html" class="nav-link"> Riwayat </a>
+
+          <a href="mekanik.html" class="nav-link"> Mekanik </a>
+
+          <a href="sparepart.html" class="nav-link"> Sparepart </a>
+
+          <a href="pengaturan.html" class="nav-link"> Pengaturan </a>
+        </nav>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="main">
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <div>
+            <h2>Kendaraan</h2>
+
+            <p>
+              Kelola data kendaraan pelanggan yang sedang melakukan service.
+            </p>
+          </div>
+        </div>
+
+        <!-- STATISTIK -->
+        <section class="stats-grid kendaraan-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="totalKendaraan"> 0 </span>
+
+            <span class="stat-label"> Total Kendaraan </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number" id="totalMenunggu"> 0 </span>
+
+            <span class="stat-label"> Menunggu </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number" id="totalDikerjakan"> 0 </span>
+
+            <span class="stat-label"> Dikerjakan </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number" id="totalQC"> 0 </span>
+
+            <span class="stat-label"> Quality Check </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number" id="totalSelesai"> 0 </span>
+
+            <span class="stat-label"> Selesai </span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-number money" id="totalPendapatan"> Rp0 </span>
+
+            <span class="stat-label"> Estimasi Pendapatan </span>
+          </div>
+        </section>
+
+        <!-- DATA KENDARAAN -->
+        <section class="panel vehicle-panel">
+          <div class="panel-header">
+            <div>
+              <h3>Daftar Kendaraan</h3>
+
+              <p>Data kendaraan yang terdaftar di Workshop Pro.</p>
+            </div>
+
+            <div class="vehicle-toolbar">
+              <div class="search-box">
+                <input
+                  type="text"
+                  id="searchKendaraan"
+                  placeholder="Cari kendaraan..."
+                />
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="btnTambahKendaraan"
+              >
+                + Tambah Kendaraan
+              </button>
+            </div>
+          </div>
+
+          <!-- TABLE -->
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>No</th>
+
+                  <th>No. Polisi</th>
+
+                  <th>Jenis</th>
+
+                  <th>Merk</th>
+
+                  <th>Pelanggan</th>
+
+                  <th>Keluhan</th>
+
+                  <th>Status</th>
+
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+
+              <tbody id="kendaraanTable"></tbody>
+            </table>
+          </div>
+
+          <!-- FOOTER TABLE -->
+          <div class="table-footer">
+            <span id="kendaraanInfo"></span>
+            <div class="pagination" id="kendaraanPagination"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- MODAL TAMBAH / EDIT -->
+    <div class="modal-overlay" id="vehicleModal">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <h3 id="vehicleModalTitle">Tambah Kendaraan</h3>
+
+            <p>Masukkan informasi kendaraan.</p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            data-close-modal="vehicleModal"
+          >
+            ×
+          </button>
+        </div>
+
+        <form id="vehicleForm">
+          <input type="hidden" id="vehicleId" />
+
+          <div class="modal-body">
+            <div class="form-grid">
+              <!-- NO POLISI -->
+              <div class="form-group">
+                <label for="vehiclePolisi"> No. Polisi </label>
+
+                <input
+                  type="text"
+                  id="vehiclePolisi"
+                  class="form-control"
+                  placeholder="Contoh: B 1234 KZ"
+                  required
+                />
+              </div>
+
+              <!-- PELANGGAN -->
+              <div class="form-group">
+                <label for="vehiclePelanggan"> Pelanggan </label>
+
+                <input
+                  type="text"
+                  id="vehiclePelanggan"
+                  class="form-control"
+                  placeholder="Nama pelanggan"
+                  required
+                />
+              </div>
+
+              <!-- JENIS -->
+              <div class="form-group">
+                <label for="vehicleJenis"> Jenis </label>
+
+                <select id="vehicleJenis" class="form-control">
+                  <option value="Mobil">Mobil</option>
+
+                  <option value="Motor">Motor</option>
+                </select>
+              </div>
+
+              <!-- MERK -->
+              <div class="form-group">
+                <label for="vehicleMerk"> Merk </label>
+
+                <input
+                  type="text"
+                  id="vehicleMerk"
+                  class="form-control"
+                  placeholder="Contoh: Toyota"
+                  required
+                />
+              </div>
+
+              <!-- KELUHAN -->
+              <div class="form-group form-full">
+                <label for="vehicleKeluhan"> Keluhan </label>
+
+                <input
+                  type="text"
+                  id="vehicleKeluhan"
+                  class="form-control"
+                  placeholder="Contoh: Ganti oli"
+                  required
+                />
+              </div>
+
+              <!-- STATUS -->
+              <div class="form-group">
+                <label for="vehicleStatus"> Status </label>
+
+                <select id="vehicleStatus" class="form-control">
+                  <option value="Menunggu">Menunggu</option>
+
+                  <option value="Dikerjakan">Dikerjakan</option>
+
+                  <option value="Quality Check">Quality Check</option>
+
+                  <option value="Selesai">Selesai</option>
+                </select>
+              </div>
+
+              <!-- ESTIMASI -->
+              <div class="form-group">
+                <label for="vehicleEstimasi"> Estimasi Biaya </label>
+
+                <input
+                  type="number"
+                  id="vehicleEstimasi"
+                  class="form-control"
+                  placeholder="350000"
+                  min="0"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-close-modal="vehicleModal"
+            >
+              Batal
+            </button>
+
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL DETAIL -->
+    <div class="modal-overlay" id="vehicleDetailModal">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <h3>Detail Kendaraan</h3>
+
+            <p>Informasi lengkap kendaraan.</p>
+          </div>
+
+          <button
+            type="button"
+            class="modal-close"
+            data-close-modal="vehicleDetailModal"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="detail-grid" id="vehicleDetailContent"></div>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-close-modal="vehicleDetailModal"
+          >
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
+```
